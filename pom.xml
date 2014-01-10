@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.sbforge</groupId>
+    <artifactId>sbforge-parent</artifactId>
+    <version>12</version>
+  </parent>
+
+
+  <artifactId>oai</artifactId>
+  <packaging>jar</packaging>
+  <name>oai</name>
+  <description>Download oai-files from various targets. Keep track of uploads by date in DB </description>
+
+  <dependencies>
+  
+    <!-- jUnit -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.8.2</version>
+      <scope>test</scope>
+    </dependency>
+
+
+    <!-- logging -->
+
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.16</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.6.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>1.6.1</version>
+      <scope>runtime</scope>
+    </dependency>
+
+    <!-- apache commons io -->
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>2.6</version>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <plugins>
+
+
+
+      <plugin>
+        <groupId>org.mortbay.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>8.1.14.v20131031</version>
+        <configuration>
+          <scanIntervalSeconds>10</scanIntervalSeconds>
+          <webApp>
+            <contextPath>/archon</contextPath>
+          </webApp>
+          <systemProperties>
+            <!-- Make jetty use log file /target/logs/jetty.log -->
+            <systemProperty>
+              <name>catalina.home</name>
+              <value>target</value>
+            </systemProperty>
+            <systemProperty>
+              <name>pom.name</name>
+              <value>jetty</value>
+            </systemProperty>
+          </systemProperties>
+        </configuration>
+      </plugin>
+
+
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.3.2</version>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <!-- Filter resources -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.4</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <addDefaultImplementationEntries>
+                true
+              </addDefaultImplementationEntries>
+            </manifest>
+          </archive>
+          <webResources>
+            <webResource>
+              <directory>${basedir}/src/main/resources/</directory>
+              <includes>
+                <include>log4j.properties</include>
+                <include>build.properties</include>
+              </includes>
+              <targetPath>WEB-INF/classes</targetPath>
+              <filtering>true</filtering>
+            </webResource>
+            <webResource>
+              <directory>${basedir}/src/main/webapp/</directory>
+              <includes>
+                <include>rest_api.jsp</include>
+              </includes>
+              <targetPath></targetPath>
+              <filtering>true</filtering>
+            </webResource>
+          </webResources>
+        </configuration>
+      </plugin>
+    </plugins>
+
+  </build>
+
+</project>

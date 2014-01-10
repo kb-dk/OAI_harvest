@@ -140,7 +140,7 @@ public class SBHarvest {
                 String request = "?verb=ListRecords&metadataPrefix=" + prefix + appendset + "&from=" + calendarToString(from,false) + "&until=" + calendarToString(until,false);
                 //String request = "?verb=ListRecords&metadataPrefix=mtp_dc&from=" + calendarToString(from,false) + "&until=" + calendarToString(until,false);
                 //request = "?verb=ListRecords&metadataPrefix=oai_dc&from=" + calendarToString(from,false) + "&until=2007-10-04";
-                System.out.println(request);
+                logger.info("request params:"+request);
                 boolean finished = false;
                 long count = 0;
                 int retcount = 0;
@@ -183,8 +183,7 @@ public class SBHarvest {
                             if (buffer.indexOf("<resumptionToken") > 0) {
                                 token = getField("resumptionToken", buffer);
                                 if (token != null && !token.equals("")) {
-                                    request = "?verb=ListRecords&resumptionToken=" + tokenEncode(token);
-                                    System.out.println(getDir() + "----" + request);
+                                    request = "?verb=ListRecords&resumptionToken=" + tokenEncode(token);                                   
                                 } else {
                                     finished = true;
                                 }
@@ -388,7 +387,7 @@ public class SBHarvest {
     }
 
     private Calendar getLastHarvestTime() throws Exception {
-        System.out.println(getTimedir() + OAIPropertiesLoader.lastharvesttime);
+        
         
         BufferedReader in = new BufferedReader(new FileReader(getTimedir() + OAIPropertiesLoader.lastharvesttime));
         String str;

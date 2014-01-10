@@ -1,5 +1,119 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <targets>
+     <!--target>
+         <url>http://ojs.statsbiblioteket.dk/index.php/mediekultur/oai</url>
+         <dest>mediekultur</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>24</delaytime>
+     </target>
+     <target>
+         <url>http://ojs.statsbiblioteket.dk/index.php/tfs/oai</url>
+         <dest>tfs</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>24</delaytime>
+     </target -->
+     <!-- target>
+         <url>http://alhena:7900/oaiprovider/</url>
+         <dest>doms</dest>
+         <prefix>indexRepresentation</prefix>
+         <delaytime>24</delaytime>
+     </target -->
+     <!-- target The One>
+         <url>http://atlas:7900/oaiprovider/</url>
+         <dest>doms</dest>
+         <prefix>indexRepresentation</prefix>
+         <delaytime>24</delaytime>
+     </target -->
+     <!-- target>
+         <url>http://pc983.sb.statsbiblioteket.dk:7900/oaiprovider/</url>
+         <dest>doms</dest>
+         <prefix>indexRepresentation</prefix>
+         <validatexml>false</validatexml>
+         <delaytime>24</delaytime>
+     </target -->
+     <!-- nedenstående er den gældende -->
+
+
+     <!-- target>
+         <url>http://pc980.sb.statsbiblioteket.dk:8080/oai/provider</url>
+         <dest>local</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>0</delaytime>
+     </target -->
+
+     <!-- target>
+         <url>http://130.226.203.32/ws/OAIHandler</url>
+         <dest>forskningsdatabasen</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>-72</delaytime>
+     </target -->
+     <!--target>
+         <url>http://sally.ruc.dk/ws/OAIHandler</url>
+         <dest>rucpure_oaidc</dest>
+         <prefix>oai_dc</prefix>
+         <set>publications</set>
+         <delaytime>-72</delaytime>
+     </target-->
+
+     <!--target>
+         <url>http://sally.ruc.dk/ws/OAIHandler</url>
+         <dest>rucpure_ddfmxd</dest>
+         <prefix>ddf-mxd</prefix>
+         <set>publications</set>
+         <delaytime>-72</delaytime>
+     </target -->
+
+     <!--target>
+         <url>http://diggy.ruc.dk/dspace-oai/request</url>
+         <dest>rucdspace_oaidc</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>-72</delaytime>
+     </target-->
+
+
+     <!--target>
+         <url>http://pure.au.dk/ws/OAIHandler</url>
+         <dest>aupure_ddfmxd</dest>
+         <prefix>ddf-mxd</prefix>
+         <set>publications:all</set>
+         <delaytime>-72</delaytime>
+     </target -->
+     <!-- AU pure -->
+     <!--target>
+         <url>http://pure.au.dk/ws/OAIHandler</url>
+         <dest>aupure_oaidc</dest>
+         <prefix>oai_dc</prefix>
+         <set>publications:all</set>
+         <delaytime>-72</delaytime>
+     </target -->
+
+     <!--target>
+         <url>http://pure.au.dk/ws/OAIHandler</url>
+         <dest>aupurestud_oaidc</dest>
+         <prefix>oai_dc</prefix>
+         <set>studentproject:all</set>
+         <delaytime>-72</delaytime>
+     </target-->
+     <!--target>
+         <url>http://www.mtp.hum.ku.dk/library/uni/sta/oai2v3/</url>
+         <dest>tusculanum2v1</dest>
+         <prefix>mtp_dc</prefix>
+         <delaytime>-24</delaytime>
+     </target-->
+
+     <!-- target>
+         <url>http://www.doabooks.org/oai</url>
+         <dest>doabooks</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>-72</delaytime>
+     </target -->
+
+
+
+     <!--- herover tests -->
+
+
+
 
      <target>
          <url>http://ojs.statsbiblioteket.dk/index.php/gn/oai</url>
@@ -87,5 +201,101 @@
          <prefix>oai_dc</prefix>
          <delaytime>24</delaytime>
      </target>
-
+     <target>
+         <url>http://pure.au.dk/ws/OAIHandler</url>
+         <dest>aupure_ddfmxd</dest>
+         <prefix>ddf-mxd</prefix>
+         <set>publications:all</set>
+         <delaytime>-72</delaytime>
+     </target>
+     <target>
+         <url>http://www.bioline.org.br/oai</url>
+         <dest>bioline</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>-72</delaytime>
+     </target>
+     <target>
+         <url>http://www.doaj.org/oai.article</url>
+         <dest>doaj</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>-72</delaytime>
+     </target>
+     <target>
+         <url>http://memory.loc.gov/cgi-bin/oai2_0</url>
+         <dest>libraryofcongress</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>-72</delaytime>
+     </target>
+     <target>
+         <url>http://cs1.ist.psu.edu/cgi-bin/oai.cgi</url>
+         <dest>citeseer</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>-72</delaytime>
+     </target>
+     <target>
+         <url>http://www.pubmedcentral.gov/oai/oai.cgi</url>
+         <dest>pubmedcentral</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>-72</delaytime>
+     </target>
+     <target>
+         <url>http://open-archive.highwire.org/handler</url>
+         <dest>highwire</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>-72</delaytime>
+     </target>
+     <target>
+         <url>http://arxiv.org/oai2</url>
+         <dest>arxiv</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>-72</delaytime>
+     </target>
+     <target>
+         <url>http://citebase.eprints.org/cgi-bin/oai2</url>
+         <dest>citebase</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>-72</delaytime>
+     </target>
+     <target>
+         <url>http://stacks.iop.org/Member/oa/2</url>
+         <dest>iop</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>-72</delaytime>
+     </target>
+     <target>
+         <url>http://dspace.mit.edu/dspace-oai/request</url>
+         <dest>dspace</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>-72</delaytime>
+     </target>
+     <target>
+         <url>http://cdsweb.cern.ch/oai2d.py</url>
+         <dest>cern</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>-72</delaytime>
+     </target>
+     <target>
+         <url>http://www.nla.gov.au/apps/oaicat/servlet/OAIHandler</url>
+         <dest>nla</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>-72</delaytime>
+     </target>
+     <target>
+         <url>http://www.biomedcentral.com/oai/2.0</url>
+         <dest>biomedcentral</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>-72</delaytime>
+     </target>
+     <target>
+         <url>http://www.ajol.info/oai</url>
+         <dest>ajol</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>-72</delaytime>
+     </target>
+     <target>
+         <url>http://caltechcstr.library.caltech.edu/perl/oai2</url>
+         <dest>caltech_coda</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>-72</delaytime>
+     </target>
 </targets>

@@ -96,16 +96,15 @@ public class SBHarvester {
             }
             //System.out.print(".");
         }
-        //doMove(datadir,scptarget);
-        System.out.println();
+        
         logger.info("Harvest finished");
     }
 
     public void doHarvest(String targetName,String url, String outdirectory, String timedir, String timedelay, String target, String set, boolean validatexml) throws Exception{
        
-        System.out.println("prefix:"+target);
+        
         //logger.info("HarvestUrl: " + url +"    Destination: " + outdirectory);
-        System.out.println("HarvestUrl: " + url +"    Destination: " + outdirectory);
+        logger.info("HarvestUrl: " + url +"    Destination: " + outdirectory);
         SBHarvest sb = new SBHarvest();
         sb.setUrl(url);
         sb.setDir(outdirectory);
@@ -118,21 +117,5 @@ public class SBHarvester {
         sb.harvestTarget();
     }
 
-    private void doMove(String datadir, String target) {
-
-        Runtime runtime = Runtime.getRuntime();
-        //datadir = "/data0/oai/harvest_2007-01-17T08-08-50Z/";
-        String[] com = {"/usr/bin/scp","-i /home/hl/.ssh/id_rsa -Cr",datadir,target};
-        String[] com1 = {"/bin/mv",datadir,datadir.replaceFirst("Z/","Z_Delivered/")};
-
-        try {
-            runtime.exec(com);
-            //System.out.println("Done: /usr/bin/scp -i /home/hl/.ssh/id_rsa -Cr " + datadir + " " + target);
-            runtime.exec(com1);
-            //System.out.println("Done: /bin/mv " + datadir + " " + datadir.replaceFirst("Z/","Z_Delivered/"));
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-
-    }
+   
 }

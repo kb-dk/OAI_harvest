@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<targets>
+
+     <target>
+         <url>http://ojs.statsbiblioteket.dk/index.php/gn/oai</url>
+         <dest>gn</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>24</delaytime>
+     </target>
+     <target>
+         <url>http://ojs.statsbiblioteket.dk/index.php/ojssb/oai</url>
+         <dest>ojssb</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>24</delaytime>
+     </target>
+     <target>
+         <url>http://ojs.statsbiblioteket.dk/index.php/qual/oai</url>
+         <dest>qual</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>24</delaytime>
+     </target>
+     <target>
+         <url>http://ojs.statsbiblioteket.dk/index.php/landbohist/oai</url>
+         <dest>landbohist</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>24</delaytime>
+     </target>
+     <target>
+         <url>http://ojs.statsbiblioteket.dk/index.php/mediekultur/oai</url>
+         <dest>mediekultur</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>24</delaytime>
+     </target>
+     <target>
+         <url>http://ojs.statsbiblioteket.dk/index.php/tfs/oai</url>
+         <dest>tfs</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>24</delaytime>
+     </target>
+     <target>
+ 
+<url>http://ojs.statsbiblioteket.dk/index.php/journalistica/oai</url>
+         <dest>journalistica</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>24</delaytime>
+     </target>
+     <target>
+         <url>http://ojs.statsbiblioteket.dk/index.php/outlines/oai</url>
+         <dest>outlines</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>24</delaytime>
+     </target>
+     <target>
+         <url>http://ojs.statsbiblioteket.dk/index.php/passage/oai</url>
+         <dest>passage</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>24</delaytime>
+     </target>
+     <target>
+         <url>http://ojs.statsbiblioteket.dk/index.php/rvt/oai</url>
+         <dest>rvt</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>24</delaytime>
+     </target>
+     <target>
+         <url>http://ojs.statsbiblioteket.dk/index.php/slagmark/oai</url>
+         <dest>slagmark</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>24</delaytime>
+     </target>
+     <target>
+ 
+<url>http://ojs.statsbiblioteket.dk/index.php/sygdomogsamfund/oai</url>
+         <dest>sygdomogsamfund</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>24</delaytime>
+     </target>
+     <target>
+         <url>http://ojs.statsbiblioteket.dk/index.php/nja/oai</url>
+         <dest>nja</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>24</delaytime>
+     </target>
+     <target>
+         <url>http://ojs.statsbiblioteket.dk/index.php/fn/oai</url>
+         <dest>kulturstudier</dest>
+         <prefix>oai_dc</prefix>
+         <delaytime>24</delaytime>
+     </target>
+
+</targets>

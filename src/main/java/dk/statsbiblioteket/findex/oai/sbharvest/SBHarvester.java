@@ -36,16 +36,28 @@ public class SBHarvester {
     static String datadir = "";
     static String timedir = "";
     static String scptarget = "";
-    static String configdir = null;
+    //static String configdir = null;
 
     public static void main(String[] args) throws Exception{
                
+        String propertyFile = System.getProperty("OaiPropertyFile");
+        if (propertyFile == null || "".equals(propertyFile)){
+            System.out.println("Propertyfile location must be set. Use -DOaiPropertyFile={path to file}");            
+            System.exit(1);
+        }
+        String log4JFile = System.getProperty("log4j.configuration");
+                
+        if (log4JFile  == null || "".equals(log4JFile )){
+            System.out.println("Log4j configuration not defined, using default. Use -Dlog4j.configuration={path to file}");                        
+        }
+        
+        
         
         System.setProperty("java.protocol.handler.pkgs","com.sun.net.ssl.internal.www.protocol");
         Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
         SBHarvester sb = new SBHarvester();
         if (args != null && args.length > 0) {
-            configdir = args[0];
+            //configdir = args[0];
         }
         try {
             sb.executeHarvest();

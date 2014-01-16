@@ -11,9 +11,8 @@ import org.slf4j.LoggerFactory;
 public class OAIPropertiesLoader {
 	
 	private static final Logger log = LoggerFactory.getLogger(OAIPropertiesLoader.class);
-	private static final String OAI_PROPERTY_FILE = "oai.properties";
-	 
-	
+	private static final String OAI_PROPERTY_FILE = System.getProperty("OaiPropertyFile");
+	 	
 	
 	private static final String oaitargetfile_PROPERTY="SBHarvester.oaitargetfile";	 
 	private static final String datadir_PROPERTY="SBHarvester.datadir";
@@ -53,7 +52,7 @@ public class OAIPropertiesLoader {
 
 		String user_home=System.getProperty("user.home");
 		log.info("Load properties: Using user.home folder:" + user_home);
-		InputStreamReader isr = new InputStreamReader(new FileInputStream(new File(user_home,OAI_PROPERTY_FILE)), "ISO-8859-1");
+		InputStreamReader isr = new InputStreamReader(new FileInputStream(new File(OAI_PROPERTY_FILE)), "ISO-8859-1");
 
 		Properties serviceProperties = new Properties();
 		serviceProperties.load(isr);

@@ -107,6 +107,7 @@ public class SBHarvest {
     public void harvestTarget() throws Exception{
         boolean gotsomething = false;
         Calendar now = new GregorianCalendar();
+        Calendar until =null;
         if (getUrl() != null && getDir() != null) {
             OAIProxy proxy = new OAIProxy();
             String timestring = calendarToString(now,true);
@@ -122,7 +123,7 @@ public class SBHarvest {
                     this.setTimedelay("-24");
                 }
                 int delay = new Integer(this.getTimedelay()).intValue();
-                Calendar until = getUntil(now,delay);
+                 until = getUntil(now,delay);
                 if (until.compareTo(from) < 0) {
                     //System.out.println("INFO: Arkivet er opdateret");
                     logger.info("Archive allready up to date");
@@ -137,6 +138,8 @@ public class SBHarvest {
                 if (set != null && !set.trim().equals("")) {
                     appendset = "&set=" + set;
                 }
+
+                                
                 String request = "?verb=ListRecords&metadataPrefix=" + prefix + appendset + "&from=" + calendarToString(from,false) + "&until=" + calendarToString(until,false);
                 //String request = "?verb=ListRecords&metadataPrefix=mtp_dc&from=" + calendarToString(from,false) + "&until=" + calendarToString(until,false);
                 //request = "?verb=ListRecords&metadataPrefix=oai_dc&from=" + calendarToString(from,false) + "&until=2007-10-04";
@@ -255,7 +258,7 @@ public class SBHarvest {
             }
             if (gotsomething) {
                 try {
-                    saveLastHarvestTime(now);
+                    saveLastHarvestTime(until);
                 } catch (Exception e) {                
                     logger.error("Could not update lastharvesttime for target:"+target);
                 }

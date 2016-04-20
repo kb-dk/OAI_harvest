@@ -1,4 +1,8 @@
 
+version 1.2 2016-04-20
+Last harvest tidspunkt ændret fra now til 'until' der blev brugt til harvest
+
+
 version 1.1 16/01/2014
 Log4j propertyfil samt oai.property fil skal nu defineres som opstarts parametre.
 f.eks.

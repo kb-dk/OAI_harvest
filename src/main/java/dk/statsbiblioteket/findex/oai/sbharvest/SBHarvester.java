@@ -35,19 +35,21 @@ public class SBHarvester {
     //static String configdir = null;
 
     public static void main(String[] args) throws Exception{
-               
+     
+        
         String propertyFile = System.getProperty("OaiPropertyFile");
         if (propertyFile == null || "".equals(propertyFile)){
             System.out.println("Propertyfile location must be set. Use -DOaiPropertyFile={path to file}");            
             System.exit(1);
         }
+        /*
         String log4JFile = System.getProperty("log4j.configuration");
                 
         if (log4JFile  == null || "".equals(log4JFile )){
             System.out.println("Log4j configuration not defined, using default. Use -Dlog4j.configuration={path to file}");                        
         }
-        
-        
+        */
+     
         
         System.setProperty("java.protocol.handler.pkgs","com.sun.net.ssl.internal.www.protocol");
         Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());

@@ -355,21 +355,12 @@ public class SBHarvest {
 
 
         cal = getLastHarvestTime();
-        cal.set(Calendar.HOUR_OF_DAY,0);
-        cal.set(Calendar.MINUTE,0);
-        cal.set(Calendar.SECOND,0);
-        cal.set(Calendar.MILLISECOND,0);
-        cal.add(Calendar.HOUR_OF_DAY, -48); //2 days ago, make sure we get everything. Overlapping not a problem
-
+     
         return cal;
     }
 
     private Calendar getUntil(Calendar incal,int deltahour) {
         Calendar cal = (Calendar) incal.clone();
-        cal.set(Calendar.HOUR_OF_DAY,0);
-        cal.set(Calendar.MINUTE,0);
-        cal.set(Calendar.SECOND,0);
-        cal.set(Calendar.MILLISECOND,0);
         cal.add(Calendar.HOUR_OF_DAY, deltahour);
         return cal;
     }

@@ -1,7 +1,6 @@
 package dk.statsbiblioteket.findex.oai.oaiproxy;
 
 import dk.statsbiblioteket.findex.oai.OAIPropertiesLoader;
-import org.apache.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,6 +9,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.MalformedURLException;
 import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by IntelliJ IDEA.
@@ -20,7 +21,7 @@ import java.util.Map;
  */
 
 public class OAIProxy {
-    static Logger logger = Logger.getLogger(OAIProxy.class.getName( ));
+    static Logger logger = LoggerFactory.getLogger(OAIProxy.class);
     
 
     int maxtries = OAIPropertiesLoader.maxtries;
@@ -139,7 +140,7 @@ public class OAIProxy {
                 }
             } catch (IOException e) {
                 //e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                logger.error(e);
+                logger.error("error",e);
                 for (int i = 0; i < e.getStackTrace().length; i++) {
                     logger.error("     at " + e.getStackTrace()[i].toString());
                 }
@@ -147,7 +148,7 @@ public class OAIProxy {
             } catch (InterruptedException e) {
                 //e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                 //e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                logger.error(e);
+                logger.error("error",e);
                 for (int i = 0; i < e.getStackTrace().length; i++) {
                     logger.error("     at " + e.getStackTrace()[i].toString());
                 }

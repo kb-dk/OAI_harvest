@@ -32,8 +32,26 @@ public class SBHarvest {
     public String target = null;
     public String set = null;
     public String timedelay = null;
+    public String password=null;
+    public String user = null;
     public boolean verifyxml = true;
 
+
+    public String getPassword() {
+      return password;
+    }
+
+    public void setPassword(String password) {
+      this.password = password;
+    }
+
+    public String getUser() {
+      return user;
+    }
+
+    public void setUser(String user) {
+      this.user = user;
+    }
 
     public boolean isVerifyxml() {
         return verifyxml;
@@ -111,7 +129,7 @@ public class SBHarvest {
         if (getUrl() != null && getDir() != null) {
             OAIProxy proxy = new OAIProxy();
             String timestring = calendarToString(now,true);
-            String buffer = proxy.getOAIXml(getUrl(),"?verb=Identify");
+            String buffer = proxy.getOAIXml(getUrl(),"?verb=Identify", user, password);
             if (buffer!= null && !buffer.equals("")) {
                 String earliestdatestamp = getField("earliestDatestamp",buffer);
                 Calendar cal = null;
@@ -138,11 +156,11 @@ public class SBHarvest {
                 if (set != null && !set.trim().equals("")) {
                     appendset = "&set=" + set;
                 }
-
-                                
+                                             
                 String request = "?verb=ListRecords&metadataPrefix=" + prefix + appendset + "&from=" + calendarToString(from,false) + "&until=" + calendarToString(until,false);
                 //String request = "?verb=ListRecords&metadataPrefix=mtp_dc&from=" + calendarToString(from,false) + "&until=" + calendarToString(until,false);
                 //request = "?verb=ListRecords&metadataPrefix=oai_dc&from=" + calendarToString(from,false) + "&until=2007-10-04";
+                        
                 logger.info("request params:"+request);
                 boolean finished = false;
                 long count = 0;
@@ -171,7 +189,11 @@ public class SBHarvest {
                             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                         }
                         //System.out.println(new Long(count + 1).longValue() + "------------------------------------------");
-                        buffer = proxy.getOAIXml(getUrl(),request);
+                    long start= System.currentTimeMillis();
+                        
+                    buffer = proxy.getOAIXml(getUrl(),request,user,password);
+                    long end = System.currentTimeMillis();
+                    logger.info("Total time millis requesting data:"+(end-start));                                        
                         String token = "";
                         if (buffer.indexOf("<ListRecords") > 0) {
                             if (retcount >= 50) {
@@ -187,6 +209,7 @@ public class SBHarvest {
                                 token = getField("resumptionToken", buffer);
                                 if (token != null && !token.equals("")) {
                                     request = "?verb=ListRecords&resumptionToken=" + tokenEncode(token);                                   
+                                    //System.out.println("request:"+request);
                                 } else {
                                     finished = true;
                                 }

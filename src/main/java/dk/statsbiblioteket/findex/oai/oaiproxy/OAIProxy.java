@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
 import java.net.MalformedURLException;
+import java.util.Base64;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,10 +28,8 @@ public class OAIProxy {
 
     int maxtries = OAIPropertiesLoader.maxtries;
 
-    String buffer = "";
-
-    public String getOAIXml(String urlstring, String request) {
-        buffer = "";
+    public String getOAIXml(String urlstring, String request, String username, String password) {
+       StringBuffer buffer =  new StringBuffer();
         URL url = null;
         boolean communicating = false;
         try {
@@ -48,6 +48,12 @@ public class OAIProxy {
                 URLConnection conn = url.openConnection();
                 conn.setRequestProperty("User-Agent",OAIPropertiesLoader.user_agent);
                 conn.setRequestProperty("From",OAIPropertiesLoader.user_email);
+           
+                if (username != null && password != null){
+                  String encoded = Base64.getEncoder().encodeToString((username+":"+password).getBytes(StandardCharsets.UTF_8));  //Java 8
+                  conn.setRequestProperty("Authorization", "Basic "+encoded);       
+                }
+                                           
                 Map header = conn.getHeaderFields();
                 Object rescode = null;
                 try {
@@ -58,22 +64,30 @@ public class OAIProxy {
                 }
                 if (rescode == null || rescode.toString().equals("")) {
                     communicating = false;
-                    buffer = "";
+                     buffer = new StringBuffer();
                     //System.out.println("FEJL: Ingen response code: " + rescode);
                     logger.error("Target returned no responsecode - no action defined");
                 } else if (rescode.toString().indexOf(" 200 ") > 0) {
                     //System.out.println("INFO: Forbundet til: " + urlstring);
                     logger.debug("Connected to '" + urlstring + "'");
+                    long start1= System.currentTimeMillis();
                     BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                     String line = "";
+                    int lc = 0;
                     while ((line = in.readLine()) != null) {
-                        //System.out.println(line);
-                        if (line.trim().startsWith("<") && line.trim().endsWith(">")) {
-                            buffer = buffer + line.trim();
-                        } else {
-                            buffer = buffer + line;
+                       lc++;
+                          if (line.trim().startsWith("<") && line.trim().endsWith(">")) {
+                            buffer.append(line.trim());
+                         } else {
+                            buffer.append(line);
                         }
+                            if (line.contains("</OAI-PMH>")) {
+                              break;
+                            }
                     }
+                    long end1=System.currentTimeMillis();
+                    //System.out.println("server time read:"+(end1-start1) + " for lines " + lc);
+                    
                     in.close();
                     communicating = false;
                     tries = 0;
@@ -85,7 +99,7 @@ public class OAIProxy {
                             logger.debug(".....................Retrystring: " + retry.toString());
                             tries = maxtries + 2;
                             communicating = false;
-                            buffer = "";
+                            buffer = new StringBuffer();
                             return "";
                         }
                         retry = retry.toString().replaceAll("\\D","");
@@ -122,19 +136,19 @@ public class OAIProxy {
                         Thread.sleep(numMillisecondsToSleep);
                     } else {
                         communicating = false;
-                        buffer = "";
+                        buffer = new StringBuffer();
                         //System.out.println("FEJL: Anviser redirect uden target");
                         logger.error("Redirect from '" + urlstring + "' with no new target");
                     }
                     tries++;
                 } else if (rescode.toString().indexOf(" 404 ") > 0) {
                     communicating = false;
-                    buffer = "";
+                    buffer = new StringBuffer();
                     //System.out.println("FEJL: Not found");
                     logger.error("Target returned responsecode '404 : Not found'");
                 } else {
                     communicating = false;
-                    buffer = "";
+                    buffer = new StringBuffer();
                     //System.out.println("FEJL: Uventet response code: " + rescode);
                     logger.error("Target returned responsecode '" + rescode + "' - no action defined");
                 }
@@ -144,7 +158,7 @@ public class OAIProxy {
                 for (int i = 0; i < e.getStackTrace().length; i++) {
                     logger.error("     at " + e.getStackTrace()[i].toString());
                 }
-                buffer = "";
+                buffer = new StringBuffer();
             } catch (InterruptedException e) {
                 //e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                 //e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
@@ -152,15 +166,15 @@ public class OAIProxy {
                 for (int i = 0; i < e.getStackTrace().length; i++) {
                     logger.error("     at " + e.getStackTrace()[i].toString());
                 }
-                buffer = "";
+                buffer = new StringBuffer();
             }
         }
-        if (buffer.equals("")) {
+        if (buffer.length() == 0) {
             //System.out.println(request);
             logger.error("Request '" + request + "' produced no acceptable response");
             return "";
         } else {
-            return buffer.split("\\<\\/OAI-PMH>")[0] + "</OAI-PMH>";
+            return buffer.toString();
         }
     }
 }

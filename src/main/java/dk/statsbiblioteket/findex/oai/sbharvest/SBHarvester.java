@@ -92,17 +92,29 @@ public class SBHarvester {
             Node timedelay = XPathAPI.selectSingleNode(nodelist.item(i),"delaytime//text()");
             Node prefix = XPathAPI.selectSingleNode(nodelist.item(i),"prefix//text()");
             Node set = XPathAPI.selectSingleNode(nodelist.item(i),"set//text()");
+            Node userNode = XPathAPI.selectSingleNode(nodelist.item(i),"user//text()");
+            Node passwordNode = XPathAPI.selectSingleNode(nodelist.item(i),"user//text()");
             Node validate = XPathAPI.selectSingleNode(nodelist.item(i),"validatexml//text()");
             SBHarvester harvester = new SBHarvester();
-          //  boolean validatexml = true;
+
+            String user = null;
+            String password= null;
+            if (userNode != null && passwordNode != null){
+              user = userNode.getNodeValue();
+              password = passwordNode.getNodeValue();              
+            }
+            
+            
+            
+            //  boolean validatexml = true;
             boolean validatexml = false; //DISABLED
             if (validate != null && validate.getNodeValue().trim().equals("false")) {
                 validatexml = false;
             }
             if (set == null) {
-                harvester.doHarvest(dest.getNodeValue(),url.getNodeValue(),datadir + dest.getNodeValue() +"/",timedir + dest.getNodeValue() +"/",timedelay.getNodeValue(), prefix.getNodeValue(), null,validatexml);
+                harvester.doHarvest(dest.getNodeValue(),url.getNodeValue(),datadir + dest.getNodeValue() +"/",timedir + dest.getNodeValue() +"/",timedelay.getNodeValue(), prefix.getNodeValue(), null,validatexml, user, password);
             } else {
-                harvester.doHarvest(dest.getNodeValue(),url.getNodeValue(),datadir + dest.getNodeValue() +"/",timedir + dest.getNodeValue() +"/",timedelay.getNodeValue(), prefix.getNodeValue(), set.getNodeValue(),validatexml);
+                harvester.doHarvest(dest.getNodeValue(),url.getNodeValue(),datadir + dest.getNodeValue() +"/",timedir + dest.getNodeValue() +"/",timedelay.getNodeValue(), prefix.getNodeValue(), set.getNodeValue(),validatexml, user, password);
             }
             //System.out.print(".");
         }
@@ -110,7 +122,7 @@ public class SBHarvester {
         logger.info("Harvest finished");
     }
 
-    public void doHarvest(String targetName,String url, String outdirectory, String timedir, String timedelay, String target, String set, boolean validatexml) throws Exception{
+    public void doHarvest(String targetName,String url, String outdirectory, String timedir, String timedelay, String target, String set, boolean validatexml, String user, String password) throws Exception{
        
         
         //logger.info("HarvestUrl: " + url +"    Destination: " + outdirectory);
@@ -124,6 +136,8 @@ public class SBHarvester {
         sb.setSet(set);
         sb.setVerifyxml(validatexml);
         sb.setTargetName(targetName);
+        sb.setUser(user);
+        sb.setPassword(password);
         sb.harvestTarget();
     }
 

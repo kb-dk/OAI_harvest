@@ -160,7 +160,7 @@ public class SBHarvest {
                 String request = "?verb=ListRecords&metadataPrefix=" + prefix + appendset + "&from=" + calendarToString(from,false) + "&until=" + calendarToString(until,false);
                 //String request = "?verb=ListRecords&metadataPrefix=mtp_dc&from=" + calendarToString(from,false) + "&until=" + calendarToString(until,false);
                 //request = "?verb=ListRecords&metadataPrefix=oai_dc&from=" + calendarToString(from,false) + "&until=2007-10-04";
-                        
+                  //      System.out.println(request);
                 logger.info("request params:"+request);
                 boolean finished = false;
                 long count = 0;
@@ -209,6 +209,7 @@ public class SBHarvest {
                                 token = getField("resumptionToken", buffer);
                                 if (token != null && !token.equals("")) {
                                     request = "?verb=ListRecords&resumptionToken=" + tokenEncode(token);                                   
+                                    logger.info(request);
                                     //System.out.println("request:"+request);
                                 } else {
                                     finished = true;
@@ -258,7 +259,9 @@ public class SBHarvest {
                             } else {
                                 retry--;
                                 try {
+                                  logger.info("sleeping for 10 minutes");
                                     Thread.sleep(60*1000*10);
+                                    logger.info("Resuming harvest after sleep");
                                 } catch (InterruptedException e) {
                                     //e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                                 }

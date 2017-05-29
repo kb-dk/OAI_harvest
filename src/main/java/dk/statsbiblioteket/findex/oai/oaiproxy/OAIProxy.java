@@ -35,7 +35,7 @@ public class OAIProxy {
         try {
             url = new URL(urlstring + request);
             communicating = true;
-            logger.debug("connecting to '" + urlstring + "' with request:'" + request + "'");
+            logger.info("connecting to '" + urlstring + "' with request:'" + request + "'");
         } catch (MalformedURLException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             communicating = false;
@@ -51,7 +51,7 @@ public class OAIProxy {
            
                 if (username != null && password != null){
                   String encoded = Base64.getEncoder().encodeToString((username+":"+password).getBytes(StandardCharsets.UTF_8));  //Java 8
-                  conn.setRequestProperty("Authorization", "Basic "+encoded);       
+                  conn.setRequestProperty("Authorization", "Basic "+encoded);                       
                 }
                                            
                 Map header = conn.getHeaderFields();
@@ -75,7 +75,8 @@ public class OAIProxy {
                     String line = "";
                     int lc = 0;
                     while ((line = in.readLine()) != null) {
-                       lc++;
+                      logger.info(line);  //TODO MUST DELETE 
+                      lc++;
                           if (line.trim().startsWith("<") && line.trim().endsWith(">")) {
                             buffer.append(line.trim());
                          } else {
@@ -86,7 +87,7 @@ public class OAIProxy {
                             }
                     }
                     long end1=System.currentTimeMillis();
-                    //System.out.println("server time read:"+(end1-start1) + " for lines " + lc);
+                    //System.out.println("server time read:"+(end1-start1) + " for lines " + lc);<record>
                     
                     in.close();
                     communicating = false;
@@ -174,7 +175,7 @@ public class OAIProxy {
             logger.error("Request '" + request + "' produced no acceptable response");
             return "";
         } else {
-            return buffer.toString();
+          return buffer.toString();
         }
     }
 }

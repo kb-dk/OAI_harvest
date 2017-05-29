@@ -93,7 +93,7 @@ public class SBHarvester {
             Node prefix = XPathAPI.selectSingleNode(nodelist.item(i),"prefix//text()");
             Node set = XPathAPI.selectSingleNode(nodelist.item(i),"set//text()");
             Node userNode = XPathAPI.selectSingleNode(nodelist.item(i),"user//text()");
-            Node passwordNode = XPathAPI.selectSingleNode(nodelist.item(i),"user//text()");
+            Node passwordNode = XPathAPI.selectSingleNode(nodelist.item(i),"password//text()");
             Node validate = XPathAPI.selectSingleNode(nodelist.item(i),"validatexml//text()");
             SBHarvester harvester = new SBHarvester();
 
@@ -104,7 +104,8 @@ public class SBHarvester {
               password = passwordNode.getNodeValue();              
             }
             
-            
+            System.out.println("user:"+user);
+            //System.out.println("password:"+password);
             
             //  boolean validatexml = true;
             boolean validatexml = false; //DISABLED

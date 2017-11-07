@@ -268,12 +268,14 @@
          <prefix>oai_dc</prefix>
          <delaytime>-72</delaytime>
      </target>
+     <!-- JIRA 1255. Not harvested anymore 
      <target>
          <url>http://cdsweb.cern.ch/oai2d.py</url>
          <dest>cern</dest>
          <prefix>oai_dc</prefix>
          <delaytime>-72</delaytime>
      </target>
+      -->
      <target>
          <url>http://www.nla.gov.au/apps/oaicat/servlet/OAIHandler</url>
          <dest>nla</dest>

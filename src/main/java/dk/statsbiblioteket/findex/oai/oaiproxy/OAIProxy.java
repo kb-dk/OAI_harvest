@@ -74,8 +74,7 @@ public class OAIProxy {
                     BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                     String line = "";
                     int lc = 0;
-                    while ((line = in.readLine()) != null) {
-                      logger.info(line);  //TODO MUST DELETE 
+                    while ((line = in.readLine()) != null) { 
                       lc++;
                           if (line.trim().startsWith("<") && line.trim().endsWith(">")) {
                             buffer.append(line.trim());

@@ -1,3 +1,6 @@
+version 1.5 2018-05-23
+xml-target fil udvidet med user/password som er nødvendigt for at høste preservica.
+
 
 version 1.2 2016-04-20
 Last harvest tidspunkt ændret fra now til 'until' der blev brugt til harvest

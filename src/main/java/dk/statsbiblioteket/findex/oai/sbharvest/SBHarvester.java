@@ -104,7 +104,7 @@ public class SBHarvester {
               password = passwordNode.getNodeValue();              
             }
             
-            System.out.println("user:"+user);
+            //System.out.println("user:"+user);
             //System.out.println("password:"+password);
             
             //  boolean validatexml = true;

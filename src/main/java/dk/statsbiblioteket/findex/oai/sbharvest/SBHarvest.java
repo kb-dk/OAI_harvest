@@ -219,7 +219,7 @@ public class SBHarvest {
                             }
                             try {
                                 buffer = getLegalXml(buffer);
-                                out = new BufferedWriter(new FileWriter(getDir() + timestring + "/" +OAIPropertiesLoader.downloadfile + "_" + new Long(count).toString() + ".xml"));
+                                out = new BufferedWriter(new FileWriter(getDir() + timestring + "/" +OAIPropertiesLoader.downloadfile + "_" + formatDownloadNumber(new Long(count)) + ".xml"));
                                 out.write(buffer);
                                 out.close();
                                 retry = 5;
@@ -228,7 +228,7 @@ public class SBHarvest {
                                 if (this.isVerifyxml()) {
                                     logger.debug("Verifying xml");
                                     XMLTest xmltest = new XMLTest();
-                                    xmltest.setFilename(getDir() + timestring + "/" + OAIPropertiesLoader.downloadfile + "_" + new Long(count - 1).toString() + ".xml");
+                                    xmltest.setFilename(getDir() + timestring + "/" + OAIPropertiesLoader.downloadfile + "_" + formatDownloadNumber(count - 1) + ".xml");
                                     xmltest.start();
                                 } else {
                                     logger.debug("Not verifying xml");
@@ -237,7 +237,7 @@ public class SBHarvest {
                                 //kunne ikke skrive fil til disk
                                 //System.out.println("-");
                                 //System.out.println("Fejl: Kunne ikke skrive fil til disk: " + getDir() + timestring + "/download_" + new Long(count).toString() + ".txt");
-                                logger.error("Could not write '" + getDir() + timestring + "/" + OAIPropertiesLoader.downloadfile + "_" + new Long(count).toString() + ".xml' to disk");
+                                logger.error("Could not write '" + getDir() + timestring + "/" + OAIPropertiesLoader.downloadfile + "_" + formatDownloadNumber(count) + ".xml' to disk");
                                 gotsomething = false;
                                 finished = true;
                             }
@@ -325,6 +325,10 @@ public class SBHarvest {
             retstr = retstr + "T" + formatter.format(cal.getTime()) + "Z";
         }
         return retstr;
+    }
+    
+    private static String formatDownloadNumber(long number){
+      return String.format("%05d", number);      
     }
 
     private String tokenEncode(String in) {

@@ -1,3 +1,7 @@
+
+version 1.6 2018-06-28
+fil navne er download_000000, download_000001 således de kan sorteres  og indlæses korrekt af summarize
+
 version 1.5 2018-05-23
 xml-target fil udvidet med user/password som er nødvendigt for at høste preservica.
 

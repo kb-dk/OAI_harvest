@@ -19,11 +19,11 @@ Ny config for preservica høstning i version 1.7:
          <delaytime>-1</delaytime>
      </target>
 
-
 delaytime -1 betyder at man kun høster op til nu MINUS 1 time. Det er for at undgå man mister poster som proceseres under kørslen. Ved ikke om det er nødvendigt.
-Med ovenstående vil en preservica høstning der startes kl 15:00:
+Med ovenstående vil en preservica høstning der startes kl 15:00 være:
 Starttidspunkt vil så være tidligere sluttidspunkt -4 timer
-sluttidspunkt vil være kl 14:00 den dag kørsel startes
+sluttidspunkt vil være kl 14:00 den dag kørsel startes (en time fra nuværende tidspunkt)
+
 
         
 version 1.6 2018-06-28

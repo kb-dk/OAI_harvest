@@ -95,15 +95,30 @@ public class SBHarvester {
             Node userNode = XPathAPI.selectSingleNode(nodelist.item(i),"user//text()");
             Node passwordNode = XPathAPI.selectSingleNode(nodelist.item(i),"password//text()");
             Node validate = XPathAPI.selectSingleNode(nodelist.item(i),"validatexml//text()");
+            Node useMinutesHoursNode = XPathAPI.selectSingleNode(nodelist.item(i),"useMinutesHours//text()");
+            Node timeCorrectionHoursNode = XPathAPI.selectSingleNode(nodelist.item(i),"timeCorrectionHours//text()");
+            
             SBHarvester harvester = new SBHarvester();
 
+            boolean useMinutesHours=false;
+            int timeCorrectionHours=0;
             String user = null;
             String password= null;
+            if (useMinutesHoursNode != null){
+              useMinutesHours =  useMinutesHoursNode.getNodeValue().trim().equals("true");              
+            }            
+            if (timeCorrectionHoursNode != null){
+              timeCorrectionHours =  Integer.parseInt(timeCorrectionHoursNode.getNodeValue().trim());              
+            }
+            
+            
             if (userNode != null && passwordNode != null){
               user = userNode.getNodeValue();
               password = passwordNode.getNodeValue();              
             }
             
+            System.out.println("timeCorrectionHours:"+timeCorrectionHours);
+            //System.out.println("useMinutesHours:"+useMinutesHours);
             //System.out.println("user:"+user);
             //System.out.println("password:"+password);
             
@@ -113,9 +128,9 @@ public class SBHarvester {
                 validatexml = false;
             }
             if (set == null) {
-                harvester.doHarvest(dest.getNodeValue(),url.getNodeValue(),datadir + dest.getNodeValue() +"/",timedir + dest.getNodeValue() +"/",timedelay.getNodeValue(), prefix.getNodeValue(), null,validatexml, user, password);
+                harvester.doHarvest(dest.getNodeValue(),url.getNodeValue(),datadir + dest.getNodeValue() +"/",timedir + dest.getNodeValue() +"/",timedelay.getNodeValue(), prefix.getNodeValue(), null,validatexml, user, password, useMinutesHours, timeCorrectionHours);
             } else {
-                harvester.doHarvest(dest.getNodeValue(),url.getNodeValue(),datadir + dest.getNodeValue() +"/",timedir + dest.getNodeValue() +"/",timedelay.getNodeValue(), prefix.getNodeValue(), set.getNodeValue(),validatexml, user, password);
+                harvester.doHarvest(dest.getNodeValue(),url.getNodeValue(),datadir + dest.getNodeValue() +"/",timedir + dest.getNodeValue() +"/",timedelay.getNodeValue(), prefix.getNodeValue(), set.getNodeValue(),validatexml, user, password, useMinutesHours,timeCorrectionHours);
             }
             //System.out.print(".");
         }
@@ -123,7 +138,7 @@ public class SBHarvester {
         logger.info("Harvest finished");
     }
 
-    public void doHarvest(String targetName,String url, String outdirectory, String timedir, String timedelay, String target, String set, boolean validatexml, String user, String password) throws Exception{
+    public void doHarvest(String targetName,String url, String outdirectory, String timedir, String timedelay, String target, String set, boolean validatexml, String user, String password, boolean useMinutesHours, int timeCorrectionHours) throws Exception{
        
         
         //logger.info("HarvestUrl: " + url +"    Destination: " + outdirectory);
@@ -139,6 +154,8 @@ public class SBHarvester {
         sb.setTargetName(targetName);
         sb.setUser(user);
         sb.setPassword(password);
+        sb.setUseHourMinutes(useMinutesHours);
+        sb.setTimeCorrectionHours(timeCorrectionHours);
         sb.harvestTarget();
     }
 

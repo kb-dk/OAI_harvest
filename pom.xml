@@ -11,7 +11,7 @@
 
  <groupId>dk.statsbiblioteket.oai</groupId>
  <artifactId>oai</artifactId>
- <version>1.6</version>
+ <version>1.7</version>
  <name>oai</name>
  <packaging>jar</packaging>
  <description>Download oai-files from various targets. Keep track of uploads by date in DB </description>

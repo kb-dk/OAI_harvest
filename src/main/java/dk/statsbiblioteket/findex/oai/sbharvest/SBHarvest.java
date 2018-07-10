@@ -35,7 +35,24 @@ public class SBHarvest {
     public String password=null;
     public String user = null;
     public boolean verifyxml = true;
+    public boolean useHourMinutes = false;
+    public int timeCorrectionHours = 0;
+       
+    public int getTimeCorrectionHours() {
+      return timeCorrectionHours;
+    }
 
+    public void setTimeCorrectionHours(int timeCorrectionHours) {
+      this.timeCorrectionHours = timeCorrectionHours;
+    }
+
+    public boolean isUseHourMinutes() {
+      return useHourMinutes;
+    }
+
+    public void setUseHourMinutes(boolean useHourMinutes) {
+      this.useHourMinutes = useHourMinutes;
+    }
 
     public String getPassword() {
       return password;
@@ -147,6 +164,10 @@ public class SBHarvest {
                     logger.info("Archive allready up to date");
                     return;
                 }
+                
+                //Correct time, this is due to preservica TUC time bug. To make sure we all, we always substract some hours. 
+                from.add(Calendar.HOUR, timeCorrectionHours);                
+                
                 String prefix = this.getTarget();
                 if (prefix == null || prefix.trim().equals("")) {
                     prefix = "oai_dc";
@@ -157,7 +178,7 @@ public class SBHarvest {
                     appendset = "&set=" + set;
                 }
                                              
-                String request = "?verb=ListRecords&metadataPrefix=" + prefix + appendset + "&from=" + calendarToString(from,false) + "&until=" + calendarToString(until,false);
+                String request = "?verb=ListRecords&metadataPrefix=" + prefix + appendset + "&from=" + calendarToString(from, useHourMinutes) + "&until=" + calendarToString(until, useHourMinutes);
                 //String request = "?verb=ListRecords&metadataPrefix=mtp_dc&from=" + calendarToString(from,false) + "&until=" + calendarToString(until,false);
                 //request = "?verb=ListRecords&metadataPrefix=oai_dc&from=" + calendarToString(from,false) + "&until=2007-10-04";
                   //      System.out.println(request);

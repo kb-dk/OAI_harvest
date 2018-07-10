@@ -1,4 +1,31 @@
 
+version 1.7 2018-07-10
+To nye properties man kan sætte i OAI targets.
+useMinutesHours: default false. Hvis true høstes med time/minut præcision. Ellers kun på dags-basis.
+timeCorrectionHours: Hver kan en harvest startes kan man korrigere starttidspunkt ved at trække nogle timer fra. Det vil normalt give overlap i høstninger, men 
+er nødvendigt for preservica for at kunne høste korrekt pga. fejl i preservica tidslogik.
+
+
+
+Ny config for preservica høstning i version 1.7:
+       <target>
+         <url>https://pvica-devel2.statsbiblioteket.dk/OAI-PMH</url>
+         <dest>preservica</dest>
+         <prefix>XIP_full_schema</prefix>
+         <user>XXXXXXXXXXXXXX</user>
+         <password>XXXXXXXXXXXXX</password>
+         <useMinutesHours>true</useMinutesHours>
+         <timeCorrectionHours>-4</timeCorrectionHours>
+         <delaytime>-1</delaytime>
+     </target>
+
+
+delaytime -1 betyder at man kun høster op til nu MINUS 1 time. Det er for at undgå man mister poster som proceseres under kørslen. Ved ikke om det er nødvendigt.
+Med ovenstående vil en preservica høstning der startes kl 15:00:
+Starttidspunkt vil så være tidligere sluttidspunkt -4 timer
+sluttidspunkt vil være kl 14:00 den dag kørsel startes
+
+        
 version 1.6 2018-06-28
 fil navne er download_000000, download_000001 således de kan sorteres  og indlæses korrekt af summarize
 
